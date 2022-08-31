@@ -2,10 +2,10 @@ import sys
 
 
 def main(argv):
-    filename = "words/allPortugueseWords.txt"
+    filename = "allPortugueseWords.txt"
     number = argv
 
-    f = open("words/ptWords_"+ number +".txt", "a")
+    f = open("ptWords_"+ number +".txt", "a")
 
     with open(filename) as file:
         for line in file:

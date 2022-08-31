@@ -1,12 +1,17 @@
-var random_word
+var RANDOM_WORD = ""
+var TOTAL_GUESSES = 6
+var NUM_GUESS = 1
+var CURRENT_GUESS = ""
 
 function add(letter) {
     for (let i = 0; i < 5; i++) {
-        let space_for_letter = document.getElementById( ""+ (i+1) ).textContent;
+        var letterID = NUM_GUESS +"x"+ (i+1)
+        let space_for_letter = document.getElementById( letterID ).textContent;
 
         if (!space_for_letter) {
-            console.log("atribuir à "+ (i+1) +"ª casa a letra "+ letter)
-            document.getElementById( ""+ (i+1) ).innerHTML = letter
+            console.log("atribuir à "+ (i+1) +"ª casa a letra "+ letter +"  | "+ letterID)
+            document.getElementById( letterID ).innerHTML = letter
+            CURRENT_GUESS += letter
             break;
         }
     }
@@ -14,36 +19,55 @@ function add(letter) {
 
 function remove() {
     for (let i = 5; i > 0; i--) {
-        let space_for_letter = document.getElementById( ""+ i ).textContent;
+        var letterID = NUM_GUESS +"x"+ i
+        let space_for_letter = document.getElementById( letterID ).textContent;
 
         if (space_for_letter) {
-            document.getElementById( ""+ i ).innerHTML = ""
+            document.getElementById( letterID ).innerHTML = ""
+            CURRENT_GUESS = CURRENT_GUESS.slice(0, -1);
             break;
         }
     }
 }
 
 function enter() {
+    if (CURRENT_GUESS.length != 5) return
+
+    if (CURRENT_GUESS.toLowerCase() === RANDOM_WORD.toLowerCase()) {
+        console.log("PALAVRA ENCONTRADA")
+        resetGame()
+        return
+    }
+
+
     for (let i = 0; i < 5; i++) {
-        let letter = document.getElementById( ""+ (i+1) ).textContent;
+        var letterID = NUM_GUESS +"x"+ (i+1)
+        let letter = document.getElementById( letterID ).textContent;
 
-        if (random_word.includes(letter)) {
-            console.log("contem a letra "+ letter)
-
-            if (random_word[i] === letter) { // correct letter position
-                document.getElementById( ""+ (i+1) ).style.backgroundColor = 'green';
-                document.getElementById( ""+ (i+1) ).style.borderColor = 'green';
+        if (RANDOM_WORD.includes(letter)) {
+            if (RANDOM_WORD[i] === letter) { // correct letter position
+                document.getElementById( letterID ).style.backgroundColor = 'green';
+                document.getElementById( letterID ).style.borderColor = 'green';
 
             } else {    // only correct letter, but the position is wrong
-                document.getElementById( ""+ (i+1) ).style.backgroundColor = 'yellow';
-                document.getElementById( ""+ (i+1) ).style.borderColor = 'yellow';
+                document.getElementById( letterID ).style.backgroundColor = 'yellow';
+                document.getElementById( letterID ).style.borderColor = 'yellow';
             }
-        } 
+
+        } else {
+            document.getElementById( letterID ).style.backgroundColor = 'lightgray';
+            document.getElementById( letterID ).style.borderColor = 'lightgray';
+        }
     }
+
+    CURRENT_GUESS = ""
+    NUM_GUESS += 1
+
+    if (NUM_GUESS == 7) console.log("A palavra correta é "+ RANDOM_WORD)
 }
 
-function generateRandomWord() {
-    var file = 'words/ptWords_5.txt';
+function generateRandomWord(num_letters) {
+    var file = 'words/ptWords_'+ num_letters +'.txt';
     var txtFile = new XMLHttpRequest();
 
     txtFile.open("GET", file, true);
@@ -54,10 +78,50 @@ function generateRandomWord() {
                 lines = txtFile.responseText.split("\n");
 
                 var index = Math.floor(Math.random() * lines.length);
-                random_word = lines[index]
-                console.log(random_word)
+                RANDOM_WORD = lines[index]
+                console.log(RANDOM_WORD)
             }
         }
     }
     txtFile.send(null);
+}
+
+
+function initBoard() {
+    let board = document.getElementById("game-board");
+
+    var num_letters = 5
+
+    for (let i = 0; i < TOTAL_GUESSES; i++) {
+        let row = document.createElement("div")
+        row.className = "letter-row"
+        
+        for (let j = 0; j < num_letters; j++) {
+            let box = document.createElement("div")
+            box.className = "letter"
+            box.id = (i+1) +"x"+ (j+1)
+            row.appendChild(box)
+        }
+
+        board.appendChild(row)
+    }
+
+    generateRandomWord(num_letters)
+}
+
+
+function resetGame() {
+    generateRandomWord(5)
+    TOTAL_GUESSES = 6
+    NUM_GUESS = 1
+    CURRENT_GUESS = ""
+
+    for (let i = 0; i < TOTAL_GUESSES; i++) {
+        for (let j = 0; j < 5; j++) {
+            var letterID = (i+1) +"x"+ (j+1)
+            document.getElementById( letterID ).innerHTML = ""
+            document.getElementById( letterID ).style.backgroundColor = "#f5f5f5"
+            document.getElementById( letterID ).style.borderColor = 'grey';
+        }
+    }
 }
