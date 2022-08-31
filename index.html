@@ -10,24 +10,63 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 	<link rel="stylesheet" href="style.css">
 
-	<!-- <script type="text/javascript" src="scripts/main.js" defer></script> -->
+	<!-- <script type="text/javascript" src="scripts/main.js"></script> -->
 	<!-- <script type="text/javascript" src="scene.js" defer></script> -->
 
     <!-- [fonte] https://www.freecodecamp.org/news/build-a-wordle-clone-in-javascript/  -->
 </head>
 
-<body>
+<body onload="generateRandomWord()">
 
     <h1>Wordle</h1>
 
-    <!-- <div class="d-flex justify-content-center">
-        <div class="letter" style="border-style: solid;">
-            <input type="text" class="input_letter"/>
+    <div id="word">
+        <div class="letter" id="1"></div>
+        <div class="letter" id="2"></div>
+        <div class="letter" id="3"></div>
+        <div class="letter" id="4"></div>
+        <div class="letter" id="5"></div>
+    </div>
+
+
+    <div id="keyboard-cont">
+        <div class="first-row">
+            <button class="keyboard-button" onclick="add('Q')">q</button>
+            <button class="keyboard-button" onclick="add('W')">w</button>
+            <button class="keyboard-button" onclick="add('E')">e</button>
+            <button class="keyboard-button" onclick="add('R')">r</button>
+            <button class="keyboard-button" onclick="add('T')">t</button>
+            <button class="keyboard-button" onclick="add('Y')">y</button>
+            <button class="keyboard-button" onclick="add('U')">u</button>
+            <button class="keyboard-button" onclick="add('I')">i</button>
+            <button class="keyboard-button" onclick="add('O')">o</button>
+            <button class="keyboard-button" onclick="add('P')">p</button>
         </div>
-    </div> -->
+        <div class="second-row">
+            <button class="keyboard-button" onclick="add('A')">a</button>
+            <button class="keyboard-button" onclick="add('S')">s</button>
+            <button class="keyboard-button" onclick="add('D')">d</button>
+            <button class="keyboard-button" onclick="add('F')">f</button>
+            <button class="keyboard-button" onclick="add('G')">g</button>
+            <button class="keyboard-button" onclick="add('H')">h</button>
+            <button class="keyboard-button" onclick="add('J')">j</button>
+            <button class="keyboard-button" onclick="add('K')">k</button>
+            <button class="keyboard-button" onclick="add('L')">l</button>
+        </div>
+        <div class="third-row">
+            <button class="keyboard-button" onclick="remove()">Del</button>
+            <button class="keyboard-button" onclick="add('Z')">z</button>
+            <button class="keyboard-button" onclick="add('X')">x</button>
+            <button class="keyboard-button" onclick="add('C')">c</button>
+            <button class="keyboard-button" onclick="add('V')">v</button>
+            <button class="keyboard-button" onclick="add('B')">b</button>
+            <button class="keyboard-button" onclick="add('N')">n</button>
+            <button class="keyboard-button" onclick="add('M')">m</button>
+            <button class="keyboard-button" onclick="enter()">Enter</button>
+        </div>
+    </div>
 
-
-    <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/main.js"></script>
 </body>
 
 </html>

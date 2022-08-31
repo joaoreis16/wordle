@@ -1,19 +1,63 @@
-function initBoard() {
-    let board = document.getElementById("game-board");
+var random_word
 
-    /* for (let i = 0; i < NUMBER_OF_GUESSES; i++) { */
+function add(letter) {
     for (let i = 0; i < 5; i++) {
-        let row = document.createElement("div")
-        row.className = "letter-row"
-        
-        for (let j = 0; j < 5; j++) {
-            let box = document.createElement("div")
-            box.className = "letter-box"
-            row.appendChild(box)
-        }
+        let space_for_letter = document.getElementById( ""+ (i+1) ).textContent;
 
-        board.appendChild(row)
+        if (!space_for_letter) {
+            console.log("atribuir à "+ (i+1) +"ª casa a letra "+ letter)
+            document.getElementById( ""+ (i+1) ).innerHTML = letter
+            break;
+        }
     }
 }
 
-initBoard()
+function remove() {
+    for (let i = 5; i > 0; i--) {
+        let space_for_letter = document.getElementById( ""+ i ).textContent;
+
+        if (space_for_letter) {
+            document.getElementById( ""+ i ).innerHTML = ""
+            break;
+        }
+    }
+}
+
+function enter() {
+    for (let i = 0; i < 5; i++) {
+        let letter = document.getElementById( ""+ (i+1) ).textContent;
+
+        if (random_word.includes(letter)) {
+            console.log("contem a letra "+ letter)
+
+            if (random_word[i] === letter) { // correct letter position
+                document.getElementById( ""+ (i+1) ).style.backgroundColor = 'green';
+                document.getElementById( ""+ (i+1) ).style.borderColor = 'green';
+
+            } else {    // only correct letter, but the position is wrong
+                document.getElementById( ""+ (i+1) ).style.backgroundColor = 'yellow';
+                document.getElementById( ""+ (i+1) ).style.borderColor = 'yellow';
+            }
+        } 
+    }
+}
+
+function generateRandomWord() {
+    var file = 'words/ptWords_5.txt';
+    var txtFile = new XMLHttpRequest();
+
+    txtFile.open("GET", file, true);
+    txtFile.onreadystatechange = function() {
+        if (txtFile.readyState === 4) {  // document is ready to parse.
+            if (txtFile.status === 200) {  // file is found
+                allText = txtFile.responseText; 
+                lines = txtFile.responseText.split("\n");
+
+                var index = Math.floor(Math.random() * lines.length);
+                random_word = lines[index]
+                console.log(random_word)
+            }
+        }
+    }
+    txtFile.send(null);
+}

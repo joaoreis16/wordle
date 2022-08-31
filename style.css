@@ -1,6 +1,6 @@
 html, body {
-    background-color: white;
-    color: black;
+    background-color: black;
+    color: white;
 }
 
 h1 {
@@ -8,42 +8,50 @@ h1 {
 }
 
 .letter {
-    width: 5em;
-    height: 7em;
+    width: 3em;
+    height: 3em;
+    border-color: white;
+    border-style: solid;
+    text-align: center;
+    background-color: lightgray;
+    border-radius: 15%;
+    font-size: medium;
+    border-color:  lightgray;
+    color: black;
+    font-weight: bold;
+    margin-left: 0.5em;
 }
 
-.input_letter {
-    width: 5em;
-    height: 7em;
-    background-color: transparent;
-    color: white;
+#word {
+  text-align: center;
+  margin-top: 1.5em;
+  display: flex;
+
 }
 
+#keyboard-cont {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-#game-board {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .letter-box {
-    border: 2px solid gray;
-    border-radius: 3px;
-    margin: 2px;
-    font-size: 2.5rem;
-    font-weight: 700;
-    height: 3rem;
-    width: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-transform: uppercase;
-  }
-  
-  .filled-box {
-    border: 2px solid black;
-  }
-  
-  .letter-row {
-    display: flex;
-  }
+#keyboard-cont div {
+  display: flex;
+}
+
+.second-row {
+  margin: 0.5rem 0;
+}
+
+.keyboard-button {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.5rem;
+  margin: 0 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 15%;
+  border-color: transparent;
+  box-shadow: rgba(255, 255, 255, 0.12) 0px 1px 3px, rgba(255, 255, 255, 255.24) 0px 1px 2px;
+}
