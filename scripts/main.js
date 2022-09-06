@@ -2,6 +2,8 @@ var RANDOM_WORD = ""
 var TOTAL_GUESSES = 6
 var NUM_GUESS = 1
 var CURRENT_GUESS = ""
+var ALL_WORDS = []
+
 
 function add(letter) {
     for (let i = 0; i < 5; i++) {
@@ -16,6 +18,7 @@ function add(letter) {
     }
 }
 
+
 function remove() {
     for (let i = 5; i > 0; i--) {
         var letterID = NUM_GUESS +"x"+ i
@@ -29,8 +32,16 @@ function remove() {
     }
 }
 
+
 function enter() {
     if (CURRENT_GUESS.length != 5) return
+
+    if (!isWord(CURRENT_GUESS)) {
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        return
+    }
 
     if (CURRENT_GUESS.toLowerCase() === RANDOM_WORD.toLowerCase()) {
         document.getElementById("exampleModalLongTitle").innerHTML = "Congratulations"
@@ -75,6 +86,7 @@ function enter() {
     }
 }
 
+
 function generateRandomWord(num_letters) {
     var file = 'words/ptWords_'+ num_letters +'.txt';
     var txtFile = new XMLHttpRequest();
@@ -89,6 +101,8 @@ function generateRandomWord(num_letters) {
                 var index = Math.floor(Math.random() * lines.length);
                 RANDOM_WORD = lines[index]
                 console.log(RANDOM_WORD)
+
+                ALL_WORDS = lines
             }
         }
     }
@@ -96,6 +110,7 @@ function generateRandomWord(num_letters) {
 }
 
 
+// [fonte] https://www.freecodecamp.org/news/build-a-wordle-clone-in-javascript/ 
 function initBoard() {
     let board = document.getElementById("game-board");
 
@@ -127,7 +142,7 @@ function resetGame() {
 
     elements = document.getElementsByClassName("keyboard-button");
     for (var i = 0; i < elements.length; i++) {
-        elements[i].style.backgroundColor="#f5f5f5";
+        elements[i].style.backgroundColor = "#f5f5f5";
     }
 
     for (let i = 0; i < TOTAL_GUESSES; i++) {
@@ -138,4 +153,9 @@ function resetGame() {
             document.getElementById( letterID ).style.borderColor = 'grey';
         }
     }
+}
+
+function isWord(word) {
+    if (ALL_WORDS.includes(word)) return true;
+    return false;
 }
