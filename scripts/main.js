@@ -9,7 +9,6 @@ function add(letter) {
         let space_for_letter = document.getElementById( letterID ).textContent;
 
         if (!space_for_letter) {
-            console.log("atribuir à "+ (i+1) +"ª casa a letra "+ letter +"  | "+ letterID)
             document.getElementById( letterID ).innerHTML = letter
             CURRENT_GUESS += letter
             break;
@@ -34,8 +33,8 @@ function enter() {
     if (CURRENT_GUESS.length != 5) return
 
     if (CURRENT_GUESS.toLowerCase() === RANDOM_WORD.toLowerCase()) {
-        console.log("PALAVRA ENCONTRADA")
-        resetGame()
+        document.getElementById("exampleModalLongTitle").innerHTML = "Congratulations"
+        document.getElementById("wordFound").click();
         return
     }
 
@@ -46,24 +45,34 @@ function enter() {
 
         if (RANDOM_WORD.includes(letter)) {
             if (RANDOM_WORD[i] === letter) { // correct letter position
-                document.getElementById( letterID ).style.backgroundColor = 'green';
-                document.getElementById( letterID ).style.borderColor = 'green';
+                document.getElementById( letterID ).style.backgroundColor = '#93C572';
+                document.getElementById( letterID ).style.borderColor = '#2E8B57';
+
+                document.getElementById( letter ).style.backgroundColor = '#2E8B57';
 
             } else {    // only correct letter, but the position is wrong
-                document.getElementById( letterID ).style.backgroundColor = 'yellow';
-                document.getElementById( letterID ).style.borderColor = 'yellow';
+                document.getElementById( letterID ).style.backgroundColor = '#FCF55F';
+                document.getElementById( letterID ).style.borderColor = '#FFD700';
+
+                document.getElementById( letter ).style.backgroundColor = '#FFD700';
             }
 
         } else {
             document.getElementById( letterID ).style.backgroundColor = 'lightgray';
-            document.getElementById( letterID ).style.borderColor = 'lightgray';
+            document.getElementById( letterID ).style.borderColor = 'grey';
+
+            document.getElementById( letter ).style.backgroundColor = 'gray';
         }
     }
 
     CURRENT_GUESS = ""
     NUM_GUESS += 1
 
-    if (NUM_GUESS == 7) console.log("A palavra correta é "+ RANDOM_WORD)
+    if (NUM_GUESS == 7) {
+        document.getElementById("exampleModalLongTitle").innerHTML = "You lose..."
+        document.getElementById("correctWord").innerHTML = "The correct word is " + RANDOM_WORD
+        document.getElementById("wordFound").click();
+    }
 }
 
 function generateRandomWord(num_letters) {
@@ -115,6 +124,11 @@ function resetGame() {
     TOTAL_GUESSES = 6
     NUM_GUESS = 1
     CURRENT_GUESS = ""
+
+    elements = document.getElementsByClassName("keyboard-button");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.backgroundColor="#f5f5f5";
+    }
 
     for (let i = 0; i < TOTAL_GUESSES; i++) {
         for (let j = 0; j < 5; j++) {
