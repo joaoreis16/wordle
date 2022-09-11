@@ -1,5 +1,5 @@
 var RANDOM_WORD = ""
-var TOTAL_GUESSES = 6
+var TOTAL_GUESSES = 5
 var NUM_GUESS = 1
 var CURRENT_GUESS = ""
 var ALL_WORDS = []
@@ -43,12 +43,6 @@ function enter() {
         return
     }
 
-    if (CURRENT_GUESS.toLowerCase() === RANDOM_WORD.toLowerCase()) {
-        document.getElementById("exampleModalLongTitle").innerHTML = "Congratulations"
-        document.getElementById("wordFound").click();
-        return
-    }
-
 
     for (let i = 0; i < 5; i++) {
         var letterID = NUM_GUESS +"x"+ (i+1)
@@ -76,10 +70,18 @@ function enter() {
         }
     }
 
+    if (CURRENT_GUESS.toLowerCase() === RANDOM_WORD.toLowerCase()) {
+        document.getElementById("exampleModalLongTitle").innerHTML = "Congratulations!"
+        document.getElementById("correctWord").innerHTML = ""
+        document.getElementById("wordFound").click();
+        return
+    }
+
+
     CURRENT_GUESS = ""
     NUM_GUESS += 1
 
-    if (NUM_GUESS == 7) {
+    if (NUM_GUESS == TOTAL_GUESSES) {
         document.getElementById("exampleModalLongTitle").innerHTML = "You lose..."
         document.getElementById("correctWord").innerHTML = "The correct word is " + RANDOM_WORD
         document.getElementById("wordFound").click();
@@ -90,6 +92,7 @@ function enter() {
 function generateRandomWord(num_letters) {
     var file = 'words/ptWords_'+ num_letters +'.txt';
     var txtFile = new XMLHttpRequest();
+
 
     txtFile.open("GET", file, true);
     txtFile.onreadystatechange = function() {
@@ -143,6 +146,8 @@ function resetGame() {
     elements = document.getElementsByClassName("keyboard-button");
     for (var i = 0; i < elements.length; i++) {
         elements[i].style.backgroundColor = "#f5f5f5";
+        document.getElementById("ENTER").style.backgroundColor = '#6082B6';
+        document.getElementById("DEL").style.backgroundColor = '#C0C0C0';
     }
 
     for (let i = 0; i < TOTAL_GUESSES; i++) {

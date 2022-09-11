@@ -4,11 +4,12 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Wordle PT</title>
+    <title>Wordle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="initBoard()">
@@ -42,7 +43,7 @@
             <button class="keyboard-button" id="L" onclick="add('L')">l</button>
         </div>
         <div class="third-row">
-            <button class="keyboard-button" id="ENTER" onclick="enter()" style="width: 4em; background-color: #6082B6;">Enter</button>
+            <button class="keyboard-button" id="ENTER" onclick="enter()" style="width: 4em; background-color: #6082B6; ">Enter</button>
             <button class="keyboard-button" id="Z" onclick="add('Z')">z</button>
             <button class="keyboard-button" id="X" onclick="add('X')">x</button>
             <button class="keyboard-button" id="C" onclick="add('C')">c</button>
@@ -50,7 +51,7 @@
             <button class="keyboard-button" id="B" onclick="add('B')">b</button>
             <button class="keyboard-button" id="N" onclick="add('N')">n</button>
             <button class="keyboard-button" id="M" onclick="add('M')">m</button>
-            <button class="keyboard-button" id="DEL" onclick="remove()" style="width: 4em; background-color: #C0C0C0;">Del</button>
+            <button class="keyboard-button" id="DEL" onclick="remove()" style="width: 3em; background-color: #C0C0C0;"> <i class="fa-solid fa-delete-left"></i> </button>
         </div>
     </div>
 
@@ -75,6 +76,19 @@
     </div>
 
     <div id="snackbar">This word doesn't exist, try again!</div>
+
+    <footer>
+
+        <ul class="socials">
+            <li><a href="https://github.com/joaoreis16"><i class="fa-brands fa-github"></i></a></li>
+            <li><a href="https://www.instagram.com/joao_reis_16/"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/joaoreis16/"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i></i></a></li>
+        </ul>
+        <!-- <p>João Reis @ 2022 </p> -->
+
+    </footer>
+    
 
     <script src="scripts/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

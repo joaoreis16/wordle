@@ -1,16 +1,19 @@
 import sys
-
+import unidecode
 
 def main(argv):
     filename = "allPortugueseWords.txt"
     number = argv
 
-    f = open("ptWords_"+ number +".txt", "a")
+    f = open("ptWords_"+ number +".txt", "w+")
 
     with open(filename) as file:
         for line in file:
             word = line[:-1]    # remove \n
-        if len(word) == int(number): f.write(line)
+
+            if '-' not in word and len(word) == int(number): 
+                line = unidecode.unidecode(line)
+                f.write(str(line).upper())
             
     f.close()
 
