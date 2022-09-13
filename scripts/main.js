@@ -36,7 +36,7 @@ function remove() {
 function enter() {
     if (CURRENT_GUESS.length != 5) return
 
-    if (!isWord(CURRENT_GUESS)) {
+    if (!isValid(CURRENT_GUESS)) {
         var x = document.getElementById("snackbar");
         x.className = "show";
         setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
@@ -160,7 +160,7 @@ function resetGame() {
     }
 }
 
-function isWord(word) {
+function isValid(word) {
     if (ALL_WORDS.includes(word)) return true;
     return false;
 }
