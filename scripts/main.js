@@ -81,7 +81,7 @@ function enter() {
     CURRENT_GUESS = ""
     NUM_GUESS += 1
 
-    if (NUM_GUESS == TOTAL_GUESSES) {
+    if (NUM_GUESS == TOTAL_GUESSES + 1) {
         document.getElementById("exampleModalLongTitle").innerHTML = "You lose..."
         document.getElementById("correctWord").innerHTML = "The correct word is " + RANDOM_WORD
         document.getElementById("wordFound").click();
@@ -139,14 +139,14 @@ function initBoard() {
 
 function resetGame() {
     generateRandomWord(5)
-    TOTAL_GUESSES = 6
+    TOTAL_GUESSES = 5
     NUM_GUESS = 1
     CURRENT_GUESS = ""
 
     elements = document.getElementsByClassName("keyboard-button");
     for (var i = 0; i < elements.length; i++) {
         elements[i].style.backgroundColor = "#f5f5f5";
-        document.getElementById("ENTER").style.backgroundColor = '#6082B6';
+        document.getElementById("ENTER").style.backgroundColor = '#A7C7E7';
         document.getElementById("DEL").style.backgroundColor = '#C0C0C0';
     }
 
